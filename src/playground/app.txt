@@ -1,0 +1,29 @@
+installations-
+npm install react-router-dom@5.1.2
+npm install redux5.0.4
+npm install uuid@3.4.0
+npm install babel-plugin-transform-object-rest-spread@6.23.0
+npm install react-redux@5.0.5
+npm install moment@2.24.0 (2.18.1)
+npm install react-dates@21.8.0 (12.7.0)
+npm install react-addons-shallow-compare@15.6.2 (15.6.0)
+final -> // npm install moment@2.18.1 react-dates@12.3.0 react-addons-shallow-compare@15.6.0
+npm install jest@20.0.4
+npm install react-test-renderer@16.12.0
+npm install enzyme@3.0.0 enzyme-adapter-react-16@1.0.0 raf@3.3.2
+npm install enzyme-to-json@3.0.1
+
+sites-
+react router
+redux.js.org
+react-dates
+moment
+jest
+react-test-renderer
+enzyme
+
+HOC highers orders components
+Reuse code
+Render hijacking
+Prop manipulation
+Abstract state
