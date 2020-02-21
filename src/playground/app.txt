@@ -51,5 +51,7 @@ setup-> node server using express
 npm install express@4.17.1
 
 
+npm i numeral@2.0.6
+
 
 
