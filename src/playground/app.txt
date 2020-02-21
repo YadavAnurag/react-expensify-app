@@ -36,3 +36,15 @@ Abstract state
 webpack.js.org -> guide section -> production
 change package.json for build and production
 make change in webpack.config.js for app to production 
+
+configure css for production
+-> install plugin for css extraction from bundle.js
+npm install --save-dev mini-css-extract-plugin@0.9.0 (used by inst-> npm install --save-dev extract-text-webpack-plugin@3.0.0)
+mini-css is working
+
+change source map in webpack.config.js for css source map for development mode
+from cheap-module-eval-source-map to -> inline-source-map
+
+
+
+
