@@ -27,3 +27,12 @@ Reuse code
 Render hijacking
 Prop manipulation
 Abstract state
+
+
+
+
+
+//////////// production
+webpack.js.org -> guide section -> production
+change package.json for build and production
+make change in webpack.config.js for app to production 
