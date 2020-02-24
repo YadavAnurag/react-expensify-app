@@ -53,5 +53,24 @@ npm install express@4.17.1
 
 npm i numeral@2.0.6
 
+// firebase setup
+go setup database in firebase, save firebase config
+npm i firebase@7.9.1
 
 
+
+//-> firebase database adding and calling to dispath
+1. components calls action generators
+2. action generators return objects
+3. component dispathes objects
+4. redux store changes
+
+updated->
+1. components calls action generators
+2. action generators return function -> (for that use redux-thunk)
+3. components dispathes function
+4. function runs (has the ability to dispath other action do whatever it wants)
+
+npm i redux@2.3.0 (used by inst-> 2.2.0)
+
+// -> testing new actions with store and database using redux-mock-store@1.5.4
