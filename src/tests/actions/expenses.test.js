@@ -1,4 +1,12 @@
-import { startAddExpense, addExpense, removeExpense, editExpense, setExpenses, startSetExpenses } from '../../actions/expenses';
+import { 
+  startAddExpense, 
+  addExpense, 
+  removeExpense,
+  startRemoveExpense, 
+  editExpense, 
+  setExpenses, 
+  startSetExpenses
+} from '../../actions/expenses';
 import configureMockStore from 'redux-mock-store';
 import expenses from '../fixtures/expenses';
 import thunk from 'redux-thunk';
@@ -21,6 +29,25 @@ test('should setup remove expense action object', ()=>{
     type: 'REMOVE_EXPENSE',
     id: '123'
   });
+});
+
+test('should remove expense from firebase', (done)=>{
+  const store = createMockStore({});
+  const id = expenses.expenses[2].id;
+  store.dispatch(startRemoveExpense({id}))
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: 'REMOVE_EXPENSE',
+        id
+      });
+      return database.ref(`expenses/${id}`)
+        .once('value')
+        .then(snapshot => {
+          expect(snapshot.val()).toBeFalsy();
+          done();
+        });
+    });
 });
 
 test('should setup edit expense action object', ()=>{
@@ -70,7 +97,7 @@ test('should add expense to database and store', (done)=>{
   })
   .catch(err => console.log('Error occurred', err));
 });
-test('should add expense with defaults to database and store', ()=>{
+test('should add expense with defaults to database and store', (done)=>{
   const store = createMockStore({}); // with default store data
   const expenseDefault ={
     description: '', 
@@ -88,6 +115,7 @@ test('should add expense with defaults to database and store', ()=>{
         ...expenseDefault 
       }
     });
+    
 
     return database.ref(`expenses/${actions[0].expense.id}`).once('value');
   }).then((snapshot)=>{
@@ -128,15 +156,16 @@ test('should setup set expense action object with data', ()=>{
   });
 });
 
-test('should fetch the expenses from firebase', ()=>{
+test('should fetch the expenses from firebase', (done)=>{
   const store = createMockStore({});
   store.dispatch(startSetExpenses())
     .then(()=>{
       const actions = store.getActions();
       expect(actions[0]).toEqual({
-        type: 'SET_EXPENSES',
-        expenses
+        type: 'SET_EXPENSES', 
+        expenses: expenses.expenses
       });
       done();
-    });
+    })
+    .catch(err => console.log('Error ', err));
 });
