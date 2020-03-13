@@ -14,10 +14,6 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-// database.ref('expenses').once('value').then((snapshot)=>{
-//   console.log(snapshot.val());
-// });
-
 export { firebase, database as default };
 
 

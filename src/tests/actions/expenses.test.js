@@ -6,15 +6,14 @@ import database from '../../firebase/firebase';
 
 const createMockStore = configureMockStore([thunk]);
 
-beforeEach((done)=>{
-  const expenseData = {};
-  expenses.expenses.forEach(({ id, description, note, amount, createdAt })=>{
-    expenseData[id] = { description, note, amount, createdAt };
-  });
-  console.log('this',expenseData);
-  // done();
-  database.ref('expenses').set(expenseData).then(()=> done());
-});
+// beforeEach((done)=>{
+//   const expenseData = {};
+//   expenses.expenses.forEach(({ id, description, note, amount, createdAt })=>{
+//     expenseData[id] = { description, note, amount, createdAt };
+//   });
+//   // done();
+//   database.ref('expenses').set(expenseData).then(()=> done());
+// });
 
 test('should setup remove expense action object', ()=>{
   const action = removeExpense({ id: '123' });
@@ -38,7 +37,6 @@ test('should setup edit expense action object', ()=>{
 
 test('should setup add expense action object with provided values', ()=>{
   const action = addExpense(expenses.expenses[0]);
-
   expect(action).toEqual({
     type: 'ADD_EXPENSE',
     expense: expenses.expenses[0]
@@ -47,7 +45,12 @@ test('should setup add expense action object with provided values', ()=>{
 
 test('should add expense to database and store', (done)=>{
   const store = createMockStore({}); // with default store data
-  const expenseData = {description: 'Mouse', note: 'from amazon', amount:90878, createdAt: 234234};
+  const expenseData = {
+    description: 'Mouse', 
+    note: 'from amazon', 
+    amount:90878, 
+    createdAt: 234234
+  };
 
   store.dispatch(startAddExpense(expenseData)).then(()=>{
     const actions = store.getActions();
@@ -60,14 +63,20 @@ test('should add expense to database and store', (done)=>{
     });
 
     return database.ref(`expenses/${actions[0].expense.id}`).once('value');
-  }).then((snapshot)=>{
+  })
+  .then((snapshot)=>{
     expect(snapshot.val()).toEqual(expenseData);
     done();
   });
 });
-test('should add expense with default to database and store', ()=>{
+test('should add expense with defaults to database and store', ()=>{
   const store = createMockStore({}); // with default store data
-  const expenseDefault ={description: '', note: '', amount: 0, createdAt: 0}
+  const expenseDefault ={
+    description: '', 
+    note: '', 
+    amount: 0, 
+    createdAt: 0
+  };
 
   store.dispatch(startAddExpense(expenseDefault)).then(()=>{
     const actions = store.getActions();
