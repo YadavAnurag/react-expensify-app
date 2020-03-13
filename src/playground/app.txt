@@ -91,3 +91,11 @@ to unset->
 heroku config:unset KEY 
 
 //-> make sure to add .env.test and .env.development to .gitignore
+
+
+// add login using firebase go and enable at firebase
+
+
+out of context React router using history 
+npm install history@4.10.1
+
