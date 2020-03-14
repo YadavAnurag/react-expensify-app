@@ -99,3 +99,6 @@ heroku config:unset KEY
 out of context React router using history 
 npm install history@4.10.1
 
+
+install babel polyfil for older browser support of moder js that babel do not transpile (e.g. [].includes)
+npm install babel-polyfil@6.26.0
